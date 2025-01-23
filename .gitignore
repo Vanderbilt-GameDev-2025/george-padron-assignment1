@@ -1,0 +1,5 @@
+flake.lock
+*.nix
+.dir-locals.el
+.envrc
+.direnv
