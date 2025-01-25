@@ -3,7 +3,7 @@
 
 A simple space shooter game where you take control of the blue ship and blast away at hordes of endless kamikaze drones coming to destroy you!
 
-![Screenshot](./screenshot.png)
+![Screenshot](./screenshots/screenshot1.png)
 ## Controls 
 
 - **Move** with *WASD* or *Arrow Keys* 
@@ -18,6 +18,8 @@ A simple space shooter game where you take control of the blue ship and blast aw
     - Increases amount of enemies that appear in each wave over time
     - Intelligently ensures that enemies don't spawn either too close to the player or outside of the bounds of the game. 
 - **Enemy AI** that tracks down the player
+
+![Many Enemies Attacking](./screenshots/screenshot2.png)
 
 ## Assets
 - *Sprites and fonts* from [Kenny Space Shooter Redux Pack](https://kenney.nl/assets/space-shooter-redux).
