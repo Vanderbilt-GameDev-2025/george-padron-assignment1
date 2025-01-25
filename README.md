@@ -7,6 +7,7 @@ A simple space shooter game where you take control of the blue ship and blast aw
 ## Controls 
 
 - **Move** with *WASD* or *Arrow Keys* 
+- **Aim** with the mouse 
 - **Fire** with *Left Mouse Button* 
 
 ## Functionality
