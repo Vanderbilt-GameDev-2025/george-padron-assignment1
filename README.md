@@ -1,5 +1,5 @@
 # Assignment One - Kamikaze Drones
-> - By George Padron
+> *By George Padron*
 
 A simple space shooter game where you take control of the blue ship and blast away at hordes of endless kamikaze drones coming to destroy you!
 
