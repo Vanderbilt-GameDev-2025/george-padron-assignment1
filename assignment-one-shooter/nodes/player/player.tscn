@@ -1,14 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://rtsmj2bdlf5e"]
+[gd_scene load_steps=6 format=3 uid="uid://rtsmj2bdlf5e"]
 
 [ext_resource type="Script" path="res://nodes/player/Player.cs" id="1_o7dhj"]
 [ext_resource type="PackedScene" uid="uid://dsdnmb7wdnbo7" path="res://nodes/player/bullet.tscn" id="2_5hjql"]
-[ext_resource type="Texture2D" uid="uid://bcqsy1iq4vswm" path="res://assets/player.png" id="3_28rlu"]
+[ext_resource type="Texture2D" uid="uid://bcqsy1iq4vswm" path="res://assets/sprites/player.png" id="3_28rlu"]
+[ext_resource type="AudioStream" uid="uid://yosgfu6r283g" path="res://assets/sounds/shoot.wav" id="4_inr2f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sc4c1"]
 size = Vector2(32, 32)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 4
+collision_mask = 12
 script = ExtResource("1_o7dhj")
 BulletScene = ExtResource("2_5hjql")
 BulletSpawnOffset = 22.5
@@ -18,3 +19,7 @@ shape = SubResource("RectangleShape2D_sc4c1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_28rlu")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_inr2f")
+volume_db = -15.0

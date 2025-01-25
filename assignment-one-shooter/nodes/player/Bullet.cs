@@ -10,11 +10,10 @@ public partial class Bullet : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        var collision = MoveAndCollide(Direction * Speed * (float)delta);
-        if (collision != null)
+        var col = MoveAndCollide(Direction * Speed * (float)delta);
+        if (col != null)
         {
-            var collider = collision.GetCollider();
-            if (collider is Enemy enemy)
+            if (col.GetCollider() is Enemy enemy)
             {
                 enemy.TakeDamage(1);
             }

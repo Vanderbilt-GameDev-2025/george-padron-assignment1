@@ -3,6 +3,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
+
     [Export]
     public float Speed = 300.0f;
 
@@ -12,9 +13,16 @@ public partial class Player : CharacterBody2D
     [Export]
     public float BulletSpawnOffset = 50.0f;
 
+    // Plays sound effects
+    private AudioStreamPlayer _audioStream;
+
+    public override void _Ready() {
+        _audioStream = GetChild<AudioStreamPlayer>(2); 
+    }
+
     public override void _PhysicsProcess(double delta)
     {
-        handleMovement();
+        handleMovement(delta);
 
         // Aim towards mouse
         Vector2 mousePos = GetGlobalMousePosition();
@@ -27,7 +35,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void handleMovement()
+    private void handleMovement(double delta)
     {
         Vector2 velocity = Velocity;
         // Get the input direction and handle the movement/deceleration.
@@ -47,8 +55,13 @@ public partial class Player : CharacterBody2D
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
             velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
         }
-        Velocity = velocity;
-        MoveAndSlide();
+
+        // Handle movement and collision
+        var col = MoveAndCollide(velocity * (float)delta);
+        if (col?.GetCollider() is Enemy _enemy) {
+            GetTree().ReloadCurrentScene();
+        }
+
     }
 
     private void Shoot()
@@ -65,6 +78,9 @@ public partial class Player : CharacterBody2D
         bullet.Direction = direction;
         bullet.LookAt(direction);
 
+
+        // Play the shoot sound effect
+        _audioStream.Play();
         // Add bullet to the scene
         GetParent().AddChild(bullet);
     }

@@ -14,9 +14,13 @@ config/name="assignment-one-shooter"
 run/main_scene="res://nodes/world.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 
+[autoload]
+
+MusicPlayer="*res://nodes/music_player.tscn"
+
 [display]
 
-mouse_cursor/custom_image="res://assets/crosshair.png"
+mouse_cursor/custom_image="res://assets/sprites/crosshair.png"
 mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 
 [dotnet]
@@ -60,3 +64,4 @@ shoot={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Bullet"
 2d_physics/layer_3="Enemy"
+2d_physics/layer_4="World"

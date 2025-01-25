@@ -11,16 +11,24 @@ public partial class Enemy : CharacterBody2D
     [Export]
     public uint MaxHealth = 2;
 
+    [Export]
+    public uint ScoreValue = 1;
+
     // Stores how many hits the player has taken. 
     private uint _health;
 
     private Node2D _player;
+    private Score _score;
+    private AudioStreamPlayer _audioStream;
 
     // Initialize private variables
     public override void _Ready()
     {
         _player = GetNode<Node2D>("/root/World/Player");
+        _score = GetNode<Score>("/root/World/Score");
         _health = MaxHealth;
+
+        _audioStream = GetNode<AudioStreamPlayer>("/root/World/EnemyDeathPlayer");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -35,8 +43,12 @@ public partial class Enemy : CharacterBody2D
     public void TakeDamage(uint damage)
     {
         _health -= damage;
-        GD.Print($"Enemy Hit, {_health} hp remaining!");
-        if (_health == 0) QueueFree();
+        // Play the hit sound effect 
+        _audioStream.Play();
+        if (_health == 0) {
+            QueueFree();
+            _score.GainScore(ScoreValue);
+        }
     }
 }
 

@@ -1,0 +1,35 @@
+[
+  {
+    "arguments": [
+      "/nix/store/591apldfgm1gr238rbfc8ib0y1z8ng2y-gcc-wrapper-14-20241116/bin/g++",
+      "-c",
+      "-std=c++17",
+      "-fno-exceptions",
+      "-fPIC",
+      "-Wwrite-strings",
+      "-m64",
+      "-march=x86-64",
+      "-fvisibility=hidden",
+      "-O2",
+      "-fPIC",
+      "-DLINUX_ENABLED",
+      "-DUNIX_ENABLED",
+      "-DTHREADS_ENABLED",
+      "-DHOT_RELOAD_ENABLED",
+      "-DDEBUG_ENABLED",
+      "-DDEBUG_METHODS_ENABLED",
+      "-DNDEBUG",
+      "-DGDEXTENSION",
+      "-Igodot-cpp/gdextension",
+      "-Igodot-cpp/include",
+      "-Igodot-cpp/gen/include",
+      "-Isrc",
+      "-o",
+      "src/register_types.os",
+      "src/register_types.cpp"
+    ],
+    "directory": "/home/doozku/Projects/game-engine/assignment-one-cpp",
+    "file": "/home/doozku/Projects/game-engine/assignment-one-cpp/src/register_types.cpp",
+    "output": "/home/doozku/Projects/game-engine/assignment-one-cpp/src/register_types.os"
+  }
+]
