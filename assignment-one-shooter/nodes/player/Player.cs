@@ -76,7 +76,7 @@ public partial class Player : CharacterBody2D
         var direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
         bullet.GlobalPosition = GlobalPosition + direction * BulletSpawnOffset;
         bullet.Direction = direction;
-        bullet.LookAt(direction);
+        bullet.LookAt(GetGlobalMousePosition());
 
 
         // Play the shoot sound effect

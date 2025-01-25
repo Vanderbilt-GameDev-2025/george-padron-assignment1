@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccae7vnqnljs8"]
+[gd_scene load_steps=8 format=3 uid="uid://ccae7vnqnljs8"]
 
 [ext_resource type="PackedScene" uid="uid://rtsmj2bdlf5e" path="res://nodes/player/player.tscn" id="1_eaeis"]
 [ext_resource type="PackedScene" uid="uid://cg2mi8ypaj7of" path="res://nodes/enemy/enemy.tscn" id="2_gexl3"]
 [ext_resource type="PackedScene" uid="uid://dkdsr74axjgtd" path="res://nodes/score/score.tscn" id="3_lsih0"]
 [ext_resource type="AudioStream" uid="uid://db7kw1l7sb0mb" path="res://assets/sounds/explosion.wav" id="4_jdfmf"]
+[ext_resource type="Texture2D" uid="uid://dvk0vsxx48n30" path="res://assets/sprites/background.png" id="5_dv8t5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mp81g"]
 size = Vector2(10, 656)
@@ -12,6 +13,7 @@ size = Vector2(10, 656)
 size = Vector2(1168, 10)
 
 [node name="World" type="Node2D"]
+metadata/_edit_vertical_guides_ = [-672.0]
 
 [node name="Player" parent="." instance=ExtResource("1_eaeis")]
 
@@ -53,3 +55,14 @@ shape = SubResource("RectangleShape2D_6tf3l")
 [node name="UpBoundary" type="CollisionShape2D" parent="Border"]
 position = Vector2(0, -333)
 shape = SubResource("RectangleShape2D_6tf3l")
+
+[node name="Background" type="TextureRect" parent="."]
+z_index = -1000
+custom_minimum_size = Vector2(100000, 100000)
+offset_left = -1088.0
+offset_top = -560.0
+offset_right = 98912.0
+offset_bottom = 99440.0
+texture = ExtResource("5_dv8t5")
+stretch_mode = 1
+metadata/_edit_lock_ = true

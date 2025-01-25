@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://cg2mi8ypaj7of"]
 
 [ext_resource type="Script" path="res://nodes/enemy/Enemy.cs" id="1_7xaae"]
-[ext_resource type="Texture2D" uid="uid://bjs58vvanhq73" path="res://assets/sprites/enemy.png" id="1_opmcs"]
+[ext_resource type="Texture2D" uid="uid://bxd4bt4x1jfm3" path="res://assets/sprites/enemy.png" id="2_13vky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2qeb"]
-size = Vector2(32, 32)
+size = Vector2(42, 46)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
@@ -16,4 +16,6 @@ MaxHealth = 1
 shape = SubResource("RectangleShape2D_b2qeb")
 
 [node name="Enemy" type="Sprite2D" parent="."]
-texture = ExtResource("1_opmcs")
+rotation = 4.71239
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_13vky")

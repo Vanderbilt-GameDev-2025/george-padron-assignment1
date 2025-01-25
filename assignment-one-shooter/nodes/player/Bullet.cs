@@ -6,7 +6,7 @@ public partial class Bullet : CharacterBody2D
     [Export]
     public float Speed = 600.0f;
 
-    public Vector2 Direction { get; set; }
+    public Vector2 Direction;
 
     public override void _PhysicsProcess(double delta)
     {
