@@ -62,4 +62,4 @@ scons platform={YOUR-VERSION-HERE}
 - *Cursor* from *yours truly*.
 
 ## Video 
-[![Youtube Here](https://img.youtube.com/vi/dJPxO5oq_s0/.0.jpg)](https://youtu.be/dJPxO5oq_s0)
+[![Youtube Here](https://img.youtube.com/vi/dJPxO5oq_s0/0.jpg)](https://youtu.be/dJPxO5oq_s0)
