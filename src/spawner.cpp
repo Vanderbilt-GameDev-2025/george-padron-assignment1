@@ -1,3 +1,7 @@
+// Made by George Padron
+// Email: george.n.padron@vanderbilt.edu
+// Vunetid: padrongn
+
 #include "spawner.h"
 #include "godot_cpp/classes/global_constants.hpp"
 #include "godot_cpp/classes/node2d.hpp"
@@ -25,6 +29,7 @@ const int CAMERA_X_MAX = 576;
 const int CAMERA_Y_MIN = -328;
 const int CAMERA_Y_MAX = 328;
 
+// Efficient Random generator
 static std::mt19937 gen(std::random_device{}());
 
 void Spawner::_bind_methods() {
@@ -101,6 +106,7 @@ void Spawner::set_spawn_radius(const float p_spawn_radius) noexcept {
   spawn_radius = p_spawn_radius;
 };
 
+// Override functions
 void Spawner::_ready() {
   // If in editor, don't run any process code
   if (Engine::get_singleton()->is_editor_hint()) {
@@ -108,6 +114,7 @@ void Spawner::_ready() {
     return;
   }
 
+  // Initialize the player if set
   if (player_path.is_empty()) {
     ERR_PRINT("Player path is empty! Please set a valid player path");
     return;
@@ -115,10 +122,9 @@ void Spawner::_ready() {
   player = get_node<Node2D>(player_path);
 }
 
-// Override function
 void Spawner::_process(double delta) {
+  // Spawn waves on each timer interval
   timer -= delta;
-
   if (timer <= 0.0) {
     spawn_wave();
     timer += time_between_spawns;
@@ -127,40 +133,47 @@ void Spawner::_process(double delta) {
 
 // Private functions
 void Spawner::spawn_wave() {
-
   for (int i = 0; i < spawn_count; ++i) {
-
-    if (target.is_valid()) {
-      Node *instanced = target->instantiate();
-
-      Node2D *instance_node2d = Object::cast_to<Node2D>(instanced);
-
-      if (!instance_node2d) {
-        ERR_PRINT("Target node failed to spawn properly!");
-        return;
-      }
-
-      instance_node2d->set_position(get_spawn_pos());
-      add_child(instance_node2d);
+    // Ensure the target is a valid scene
+    if (!target.is_valid()) {
+      ERR_PRINT("Target is invalid!");
+      return;
     }
+
+    // Instantiate the target
+    Node *instanced = target->instantiate();
+    Node2D *instance_node2d = Object::cast_to<Node2D>(instanced);
+    if (!instance_node2d) {
+      ERR_PRINT("Target node failed to spawn properly!");
+      return;
+    }
+
+    // Now set the position of the newly instantiated node
+    instance_node2d->set_position(get_spawn_pos());
+    add_child(instance_node2d);
   }
 
   ++spawn_count;
 }
 
+// Generates a random position between `a` and `b`
 float Spawner::get_random_pos(const float a, const float b) noexcept {
   std::uniform_real_distribution dist(a, b);
   return dist(gen);
 }
 
+// Generates valid spawn positions for generated Nodes to use
 Vector2 Spawner::get_spawn_pos() noexcept {
   Vector2 player_pos = player->get_position();
 
   while (true) {
 
+    // Get random values within the accepted camera raidus
     float x = get_random_pos(CAMERA_X_MIN, CAMERA_X_MAX);
     float y = get_random_pos(CAMERA_Y_MIN, CAMERA_Y_MAX);
 
+    // Only accept values 'spawn_radius' units away from
+    // the player's position
     float dist = (Vector2(x, y) - player_pos).length();
     if (dist > spawn_radius) {
       return Vector2(x, y);

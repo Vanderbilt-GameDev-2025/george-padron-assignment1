@@ -1,15 +1,21 @@
+// Made by George Padron
+// Email: george.n.padron@vanderbilt.edu
+// Vunetid: padrongn
+
 using Godot;
 using System;
 
 public partial class Player : CharacterBody2D
 {
 
+    // How quickly the ship moves
     [Export]
     public float Speed = 300.0f;
 
     [Export]
     public PackedScene BulletScene;
 
+    // How far the bullet is from the center of the player when created
     [Export]
     public float BulletSpawnOffset = 50.0f;
 
@@ -17,6 +23,7 @@ public partial class Player : CharacterBody2D
     private AudioStreamPlayer _audioStream;
 
     public override void _Ready() {
+        // Get the audioStream as a child of this node
         _audioStream = GetChild<AudioStreamPlayer>(2); 
     }
 
@@ -35,6 +42,7 @@ public partial class Player : CharacterBody2D
         }
     }
 
+    // Handles movement with the arrow keys/WASD
     private void handleMovement(double delta)
     {
         Vector2 velocity = Velocity;
@@ -56,9 +64,11 @@ public partial class Player : CharacterBody2D
             velocity.Y = Mathf.MoveToward(Velocity.Y, 0, Speed);
         }
 
-        // Handle movement and collision
+        // Finalize movement
         var col = MoveAndCollide(velocity * (float)delta);
+        // Check for collisions with enemies
         if (col?.GetCollider() is Enemy _enemy) {
+            // Reset the scene on collision
             GetTree().ReloadCurrentScene();
         }
 
@@ -66,6 +76,7 @@ public partial class Player : CharacterBody2D
 
     private void Shoot()
     {
+        // Do nothing if the bullet is not set 
         if (BulletScene == null) {
             GD.PushError("Bullet Scene Not Set!");
             return;
@@ -73,14 +84,17 @@ public partial class Player : CharacterBody2D
 
         // Create bullet instance
         Bullet bullet = BulletScene.Instantiate<Bullet>();
-        var direction = (GetGlobalMousePosition() - GlobalPosition).Normalized();
+        // Make sure the bullet moves towards the mouse cursor's position
+        Vector2 mousePos = GetGlobalMousePosition();
+        var direction = (mousePos - GlobalPosition).Normalized();
+        // Make bullet appear in front of ship facing cursor  
         bullet.GlobalPosition = GlobalPosition + direction * BulletSpawnOffset;
         bullet.Direction = direction;
-        bullet.LookAt(GetGlobalMousePosition());
-
+        bullet.LookAt(mousePos);
 
         // Play the shoot sound effect
         _audioStream.Play();
+
         // Add bullet to the scene
         GetParent().AddChild(bullet);
     }

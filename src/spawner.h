@@ -1,3 +1,17 @@
+// Made by George Padron
+// Email: george.n.padron@vanderbilt.edu
+// Vunetid: padrongn
+//
+// Spawner class used to spawn nodes.
+// Scenes defined by `target` are spawned in intervals defined
+// by `time_between_spawns`. Nodes will spawn `spawn_radius` world units
+// away from the "player", as defined by `player_path`. Nodes will
+// never be spawned outside of the camera. The amount of nodes spawned starts
+// at `spawn_count` and increases by one for each wave.
+//
+// Can be used generically to spawn any kind of Scene, including collectible.
+// In this game, this is only used to spawn enemies, however it can be adapted
+// to spawn any kind of object.
 #ifndef SPAWNER_H
 #define SPAWNER_H
 
